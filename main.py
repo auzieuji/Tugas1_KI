@@ -45,25 +45,25 @@ pbox = [
             8,   11, 21, 0, 9,  17, 19, 13,
             30,  7,  1, 24, 22, 23, 31, 16
         ]
-Initial_Permutation =    [   
-            1,  57, 49, 41, 33, 25, 17, 9,
-            59, 51, 43, 35, 27, 19, 11, 3,
-            61, 53, 45, 37, 29, 21, 13, 5,
-            63, 55, 47, 39, 31, 23, 15, 7,
-            56, 48, 40, 32, 24, 16, 8,  0,
-            58, 50, 42, 34, 26, 18, 10, 2,
-            60, 52, 44, 36, 28, 20, 12, 4,
-            62, 54, 46, 38, 30, 22, 14, 6
+IP =    [       
+                57, 49, 41, 33, 25, 17, 9,  1,
+                59, 51, 43, 35, 27, 19, 11, 3,
+                61, 53, 45, 37, 29, 21, 13, 5,
+                63, 55, 47, 39, 31, 23, 15, 7,
+                56, 48, 40, 32, 24, 16, 8,  0,
+                58, 50, 42, 34, 26, 18, 10, 2,
+                60, 52, 44, 36, 28, 20, 12, 4,
+                62, 54, 46, 38, 30, 22, 14, 6
     ]
-Final_Permutation =    [
-            32,  0,  40,  8,  56, 24, 48, 16,
-            39,  7,  47, 15,  55, 23,  63, 31,
-            38,  6,  46, 14,  54, 22,  62, 30,
-            37,  5,  45, 13,  53, 21,  61, 29,
-            36,  4,  44, 12,  52, 20,  60, 28,
-            35,  3,  43, 11,  51, 19,  59, 27,
-            34,  2,  42, 10,  50, 18,  58, 26,
-            33,  1,  41,  9,  57, 25,  49, 17
+FP =    [
+                39,  7, 47, 15, 55, 23, 63, 31,
+                38,  6, 46, 14, 54, 22, 62, 30,
+                37,  5, 45, 13, 53, 21, 61, 29,
+                36,  4, 44, 12, 52, 20, 60, 28,
+                35,  3, 43, 11, 51, 19, 59, 27,
+                34,  2, 42, 10, 50, 18, 58, 26,
+                33,  1, 41,  9, 49, 17, 57, 25,
+                32,  0, 40,  8, 48, 16, 56, 24
     ]
 C =     [
             9,  1, 51, 50, 42, 34, 26,
@@ -149,22 +149,22 @@ def plain_to_binary(plaintext):
 
 
 def apply_Initial_Permutation():
-    global Final_Permutation, block
+    global FP, block
     dummy = []
     dummy.extend(block)
     for i in range(0, 64):
-        dummy[i] = block[(Initial_Permutation[i])]
+        dummy[i] = block[(IP[i])]
     block = []
     block.extend(dummy)
     return
 
 
 def apply_Final_Permutation():
-    global Final_Permutation, block
+    global FP, block
     dummy = []
     dummy.extend(block)
     for i in range(0, 64):
-        dummy[i] = block[(Final_Permutation[i])]
+        dummy[i] = block[(FP[i])]
     block = []
     block.extend(dummy)
     return
@@ -183,7 +183,7 @@ def expansion_permutation():
 
 
 def sbox_function():
-    global s, right_block, to_binary, row_mapping, column_mapping
+    global sbox, right_block, to_binary, row_mapping, column_mapping
 
     for i in range(0, 8):
         row = str(right_block[i][0])+str(right_block[i][-1])
